@@ -1,0 +1,5 @@
+ 
+31531 is prime.
+520482 is not prime. Divisible by 2
+485827 is prime.
+15485863 is prime.
