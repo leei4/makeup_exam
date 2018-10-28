@@ -10,8 +10,7 @@ long long int modular_pow(long long int base, int exponent,
 { 
 	long long int result = 1; 
 
-	while (exponent > 0) 
-	{ 
+	while(exponent > 0){ 
 		//if y is odd, multiply base with result
 		if (exponent & 1){
 			result = (result * base) % modulus; 
@@ -33,10 +32,17 @@ long long int PollardRho(long long int n)
 	srand (time(NULL)); 
 
 	//edge case for if n = 1
-	if (n==1) return n; 
+	if(n ==1){
+		return n; 
+	}
 
+	if(n == 2){
+		return n
+	}
 	//divisible by 2 check
-	if (n % 2 == 0) return 2; 
+	if(n % 2 == 0){
+		return 2; 
+	}
 
 	//choose random int on range 
 	long long int x = (rand()%(n-2))+2; 
@@ -45,9 +51,7 @@ long long int PollardRho(long long int n)
 	long long int c = (rand()%(n-1))+1; 
 	long long int d = 1; 
 
-	while (d==1) 
-	{ 
-
+	while (d==1) { 
 		x = (modular_pow(x, 2, n) + c + n)%n; 
 
 		y = (modular_pow(y, 2, n) + c + n)%n; 
@@ -55,9 +59,14 @@ long long int PollardRho(long long int n)
 
 		d = __gcd(abs(x-y), n); 
 
-		if( d == 1) return d;
+		if( d == 1){
+			return d;
+		}
+
 		//retry if necessary
-		if (d==n) return PollardRho(n);
+		if(d == n){ 
+			return PollardRho(n);
+		}
 	} 
 
 	return d; 
@@ -70,7 +79,7 @@ int main()
 	
 	for(int t = 0; t < nums.size(); t++){
 		long long int i  = PollardRho(nums[t]);
-		if(i == 1){
+		if(i == 1 || i == 2){
 			printf("%lld is prime!", nums[t]);
 			printf("\n");
 		}
